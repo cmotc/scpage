@@ -4,6 +4,8 @@ SOURCEBINPATH=.
 SOURCEBIN=scpage.sh
 SOURCEDOC=README.md
 DEBFOLDER=scpage
+WRAP=scpage-wrap
+WRAP_HTML=scpage-html
 DEBVERSION=$(date +%Y%m%d)
 CONTROL_FILE="Source: scpage
 Section: admin
@@ -17,8 +19,8 @@ Vcs-Browser: https://github.com/cmotc/scpage
 
 Package: scpage
 Architecture: all
-Depends: \${misc:Depends}, markdown
-Description: Generates a Markdown-formatted description of a source package
+Depends: \${misc:Depends}, markdown | discount
+Description: Generates a Markdown-formatted description of a software package
  and a corresponding html page. For use with my repo generator, apt-git so that
  it can generate package description pages automatically and make the
  repositories easier to browse. It's a very, very basic little script. I don't
@@ -36,10 +38,11 @@ mkdir $DEBFOLDERNAME
 
 # Copy your script to the source dir
 cp $SOURCEBINPATH/$SOURCEBIN $DEBFOLDERNAME/$DEBFOLDER
+cp $SOURCEBINPATH/$WRAP $DEBFOLDERNAME/$WRAP
 cd $DEBFOLDERNAME
 
 # Create the packaging skeleton (debian/*)
-dh_make -s --indep --createorig
+dh_make --indep --createorig
 echo "$CONTROL_FILE" > debian/control
 
 # Remove make calls
@@ -49,6 +52,7 @@ mv debian/rules.new debian/rules
 # debian/install must contain the list of scripts to install
 # as well as the target directory
 echo $DEBFOLDER usr/bin > debian/install
+echo $WRAP usr/bin >> debian/install
 #echo $SOURCEDOC usr/share/doc/apt-git >> debian/install
 
 # Remove the example files
