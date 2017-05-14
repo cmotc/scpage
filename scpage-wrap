@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /usr/bin/env sh
 DOCTYPE_HEADER='<!DOCTYPE html>'
 HTML='<html>'
 if [ -z $TITLE ]; then
