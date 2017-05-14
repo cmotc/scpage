@@ -44,10 +44,10 @@ HONE="============="
 if [ ! -z "$MARKDOWN" ]; then
     printf "%b\n" "\n<div id=\"header\">\n"
 fi
-[ ! ! -z "$PKGFILEBIN" ] && printf "%b\n" "$PKGFILEBIN \n$HONE \n" | tee $PKG_FILE.md $MARKDOWN
+[ ! ! -z "$PKGFILEBIN" ] && printf "%b\n" "$PKGFILEBIN \n$HONE \n" | tee $PKG_FILE.md | ( [ "${MARKDOWN}" ] && markdown)
 PKGFILESRC=$(cat $PKG_FILE | grep 'Source:' | sed -e 's/^[ \t]*//')
 HTWO="-------------"
-[ ! -z "$PKGFILESRC" ] && printf "%b\n" "$PKGFILESRC \n$HTWO \n" | tee -a $PKG_FILE.md $MARKDOWN
+[ ! -z "$PKGFILESRC" ] && printf "%b\n" "$PKGFILESRC \n$HTWO \n" | tee -a $PKG_FILE.md | ( [ "${MARKDOWN}" ] && markdown)
 if [ ! -z "$MARKDOWN" ]; then
     printf "%b\n" "\n</div>\n"
     printf "%b\n" "\n<div id=\"content\">\n"
@@ -56,10 +56,10 @@ PKGFILEVER=$(echo -n "###" && cat $PKG_FILE | grep 'Version:' | sed -e 's/^[ \t]
 PKGFILEMAN=$(echo -n "####" && cat $PKG_FILE | grep 'Maintainer:' | sed -e 's/^[ \t]*//')
 PKGFILEDEP=$(cat $PKG_FILE | grep 'Build-Depends:' | sed -e 's/^[ \t]*//' | sed -e 's/Build-Depends:/###Build-Depends:\n  */')
 PKGFILEREC=$(cat $PKG_FILE | grep 'Vcs-Browser:' | sed -e 's/^[ \t]*//' | sed -e 's/Vcs-Browser:/###Vcs-Browser:\n  */')
-[ ! -z "$PKGFILEVER" ] && printf "%b\n" "$PKGFILEVER" | tee -a $PKG_FILE.md $MARKDOWN
-[ ! -z "$PKGFILEMAN" ] && printf "%b\n" "$PKGFILEMAN" | tee -a $PKG_FILE.md $MARKDOWN
-[ ! -z "$PKGFILEDEP" ] && printf "%b\n" "$PKGFILEDEP" | tee -a $PKG_FILE.md $MARKDOWN
-[ ! -z "$PKGFILEREC" ] && printf "%b\n" "$PKGFILEREC" | tee -a $PKG_FILE.md $MARKDOWN
+[ ! -z "$PKGFILEVER" ] && printf "%b\n" "$PKGFILEVER" | tee -a $PKG_FILE.md | ( [ "${MARKDOWN}" ] && markdown)
+[ ! -z "$PKGFILEMAN" ] && printf "%b\n" "$PKGFILEMAN" | tee -a $PKG_FILE.md | ( [ "${MARKDOWN}" ] && markdown)
+[ ! -z "$PKGFILEDEP" ] && printf "%b\n" "$PKGFILEDEP" | tee -a $PKG_FILE.md | ( [ "${MARKDOWN}" ] && markdown)
+[ ! -z "$PKGFILEREC" ] && printf "%b\n" "$PKGFILEREC" | tee -a $PKG_FILE.md | ( [ "${MARKDOWN}" ] && markdown)
 if [ ! -z "$MARKDOWN" ]; then
     printf "%b\n" "\n</div>\n"
     printf "%b\n" "\n<div id=\"sidebar\">\n"
@@ -70,11 +70,11 @@ PKGFILEPRI=$(echo -n "####" && cat $PKG_FILE | grep 'Binary:' | sed -e 's/^[ \t]
 PKGFILESIZ=$(echo -n "####" && cat $PKG_FILE | grep 'Vcs-Git:' | sed -e 's/^[ \t]*//')
 PKG_URL=$(cat $PKG_FILE | grep 'Homepage:' | sed -e 's/Homepage:/ /' | sed -e 's/^[ \t]*//') #)
 PKGFILEURL=$(cat $PKG_FILE | grep 'Homepage:' | sed -e 's/^[ \t]*//' | sed -e 's/Homepage:/Homepage:[/' | tr "\n" " " && echo "]($PKG_URL)")
-[ ! -z "$PKGFILEURL" ] && printf "%b\n" "$PKGFILEURL" | tee -a $PKG_FILE.md $MARKDOWN
-[ ! -z "$PKGFILEPRV" ] && printf "%b\n" "$PKGFILEPRV" | tee -a $PKG_FILE.md $MARKDOWN
-[ ! -z "$PKGFILESEC" ] && printf "%b\n" "$PKGFILESEC" | tee -a $PKG_FILE.md $MARKDOWN
-[ ! -z "$PKGFILESIZ" ] && printf "%b\n" "$PKGFILESIZ" | tee -a $PKG_FILE.md $MARKDOWN
-[ ! -z "$PKGFILEPRI" ] && printf "%b\n" "$PKGFILEPRI" | tee -a $PKG_FILE.md $MARKDOWN
+[ ! -z "$PKGFILEURL" ] && printf "%b\n" "$PKGFILEURL" | tee -a $PKG_FILE.md | ( [ "${MARKDOWN}" ] && markdown)
+[ ! -z "$PKGFILEPRV" ] && printf "%b\n" "$PKGFILEPRV" | tee -a $PKG_FILE.md | ( [ "${MARKDOWN}" ] && markdown)
+[ ! -z "$PKGFILESEC" ] && printf "%b\n" "$PKGFILESEC" | tee -a $PKG_FILE.md | ( [ "${MARKDOWN}" ] && markdown)
+[ ! -z "$PKGFILESIZ" ] && printf "%b\n" "$PKGFILESIZ" | tee -a $PKG_FILE.md | ( [ "${MARKDOWN}" ] && markdown)
+[ ! -z "$PKGFILEPRI" ] && printf "%b\n" "$PKGFILEPRI" | tee -a $PKG_FILE.md | ( [ "${MARKDOWN}" ] && markdown)
 
 if [ ! -z "$MARKDOWN" ]; then
     printf "%b\n" "\n</div>\n"
