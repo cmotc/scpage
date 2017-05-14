@@ -1,0 +1,5 @@
+scpage (1.0-1) unstable; urgency=medium
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- idk <idk@fireaxe.local>  Sun, 14 May 2017 04:13:27 -0400

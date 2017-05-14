@@ -1,0 +1,6 @@
+scpage usr/bin
+scpage-wrap usr/bin
+scpage.html usr/share/doc/scpage
+index.html usr/share/doc/scpage
+style.css usr/share/doc/scpage
+LICENSE usr/share/doc/scpage

@@ -55,7 +55,7 @@ fi
 PKGFILEVER=$(echo -n "###" && cat $PKG_FILE | grep 'Version:' | sed -e 's/^[ \t]*//')
 PKGFILEMAN=$(echo -n "####" && cat $PKG_FILE | grep 'Maintainer:' | sed -e 's/^[ \t]*//')
 PKGFILEDEP=$(cat $PKG_FILE | grep 'Build-Depends:' | sed -e 's/^[ \t]*//' | sed -e 's/Build-Depends:/###Build-Depends:\n  */')
-PKGFILEREC=$(cat $PKG_FILE | grep 'Vcs-Browser:' | sed -e 's/^[ \t]*//' | sed -e 's/Vcs-Browser:/###Vcs-Browser:\n  */')
+PKGFILEREC=$(cat $PKG_FILE | grep 'Vcs-Browser:' | sed -e 's/^[ \t]*//' | sed -e 's/Recommends:/###Recommends:\n  */')
 [ ! -z "$PKGFILEVER" ] && printf "%b\n" "$PKGFILEVER" | tee -a $PKG_FILE.md $MARKDOWN
 [ ! -z "$PKGFILEMAN" ] && printf "%b\n" "$PKGFILEMAN" | tee -a $PKG_FILE.md $MARKDOWN
 [ ! -z "$PKGFILEDEP" ] && printf "%b\n" "$PKGFILEDEP" | tee -a $PKG_FILE.md $MARKDOWN
