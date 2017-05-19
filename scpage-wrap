@@ -1,4 +1,5 @@
 #! /usr/bin/env sh
+
 DOCTYPE_HEADER='<!DOCTYPE html>'
 HTML='<html>'
 if [ -z $TITLE ]; then
@@ -18,5 +19,7 @@ HEADER="<head>\n
 echo $DOCTYPE_HEADER
 echo $HTML
 printf "%b\n" $HEADER
+echo "  <body>"
 scpage -p -f "$@"
+echo "  </body>"
 echo "</html>"
