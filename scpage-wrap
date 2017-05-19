@@ -18,5 +18,5 @@ HEADER="<head>\n
 echo $DOCTYPE_HEADER
 echo $HTML
 printf "%b\n" $HEADER
-scpage -p "$@"
+scpage -p -f "$@"
 echo "</html>"
