@@ -44,7 +44,7 @@ HONE="============="
 if [ ! -z "$OUTPUT_PAGE" ]; then
     printf "%b\n" "\n<div id=\"header\">\n"
 fi
-[ ! ! -z "$PKGFILEBIN" ] && printf "%b\n" "$PKGFILEBIN \n$HONE \n" | tee $PKG_FILE.md | ( [ ! -z "${OUTPUT_PAGE}" ] && markdown)
+[ ! ! -z "$PKGFILEBIN" ] && printf "%b\n" "$PKGFILEBIN \n$HONE \n" | tee $PKG_FILE.md | ( [ ! -z "${OUTPUT_PAGE}" ] && markdown || tee -a $PKG_FILE.md )
 PKGFILESRC=$(cat $PKG_FILE | grep 'Source:' | sed -e 's/^[ \t]*//')
 HTWO="-------------"
 [ ! -z "$PKGFILESRC" ] && printf "%b\n" "$PKGFILESRC \n$HTWO \n" | ( [ ! -z "${OUTPUT_PAGE}" ] && markdown || tee -a $PKG_FILE.md )
